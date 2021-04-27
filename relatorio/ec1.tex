@@ -1,0 +1,834 @@
+\documentclass[a4paper]{article} 
+\input{head}
+\begin{document}
+
+%-------------------------------
+%	TITLE SECTION
+%-------------------------------
+
+\fancyhead[C]{}
+\hrule \medskip % Upper rule
+\begin{minipage}{0.295\textwidth}
+    \raggedright
+    \footnotesize
+    Bernardo Cardoso Rodrigues \hfill\\
+    262249\hfill\\
+    bernardocrodrigues@live.com
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+    \centering
+    \large
+    Exercícios de Fixação de Conceitos \\EF 1\\
+    \normalsize
+    IA353 – Redes Neurais (1s2021)\\
+\end{minipage}
+\begin{minipage}{0.295\textwidth}
+    \raggedleft
+    \today\hfill\\
+\end{minipage}
+\medskip\hrule
+\bigskip
+
+%-------------------------------
+%	CONTENTS
+%-------------------------------
+
+\section{MNIST: Síntese de modelos lineares para classificação de padrões}
+% \blindtext
+\subsection{Busca por coeficientes de normalização}
+
+\subsubsection{Busca grossa}
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/crude.png}}
+    \caption{Perfomance do classificador para cada valor utilziado de 'c'}  % Poe um texto na parte de baixo da figura.
+    \label{fig:fig1}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\subsubsection{Busca fina}
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/fine.png}}
+    \caption{Perfomance do classificador para cada valor utilziado de 'c'}  % Poe um texto na parte de baixo da figura.
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+
+\subsubsection{Resultado}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Busca} & \textbf{Melhor valor de c} & \textbf{Desempenho} \\ \hline
+        Grossa         & 1024                       & 0.851083...         \\ \hline
+        Fina           & 2176                       & 0.8513...           \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Mapas de calor}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/1.png}}
+        \caption{Classificador para '1'}
+        \label{fig:fig3}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/2.png}}
+        \caption{Classificador para '2'}
+        \label{fig:fig4}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/3.png}}
+        \caption{Classificador para '3'}
+        \label{fig:fig5}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/4.png}}
+        \caption{Classificador para '4'}
+        \label{fig:fig6}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/5.png}}
+        \caption{Classificador para '5'}
+        \label{fig:fig7}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/6.png}}
+        \caption{Classificador para '6'}
+        \label{fig:fig8}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/7.png}}
+        \caption{Classificador para '7'}
+        \label{fig:fig9}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/8.png}}
+        \caption{Classificador para '8'}
+        \label{fig:fig10}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/9.png}}
+        \caption{Classificador para '9'}
+        \label{fig:fig11}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/0.png}}
+        \caption{Classificador para '0'}
+        \label{fig:fig12}
+    \end{subfigure}%
+\end{figure}
+
+
+\subsection{Classificação do conjunto de Teste}
+
+Valor de \textbf{c} utilizado: \textbf{2176} \\
+Desempenho obtido: \textbf{85.77\%}
+
+\subsubsection{Matriz Confusão}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+        \hline
+        \tiny
+        \backslashbox{Predição}{Real} & \textbf{1}   & \textbf{2}    & \textbf{3}   & \textbf{4}   & \textbf{5}   & \textbf{6}   & \textbf{7}   & \textbf{8}   & \textbf{9}   & \textbf{0}   \\ \hline
+        \textbf{1}                    & \textbf{940} & 0             & 18           & 5            & 1            & 19           & 15           & 5            & 13           & 20           \\ \hline
+        \textbf{2}                    & 0            & \textbf{1105} & 60           & 14           & 22           & 15           & 10           & 44           & 61           & 15           \\ \hline
+        \textbf{3}                    & 1            & 2             & \textbf{825} & 24           & 6            & 8            & 5            & 17           & 7            & 3            \\ \hline
+        \textbf{4}                    & 2            & 2             & 22           & \textbf{886} & 2            & 95           & 0            & 7            & 31           & 14           \\ \hline
+        \textbf{5}                    & 1            & 1             & 16           & 3            & \textbf{877} & 22           & 16           & 15           & 24           & 61           \\ \hline
+        \textbf{6}                    & 9            & 0             & 0            & 14           & 1            & \textbf{598} & 16           & 0            & 33           & 1            \\ \hline
+        \textbf{7}                    & 18           & 5             & 24           & 9            & 12           & 25           & \textbf{888} & 2            & 19           & 1            \\ \hline
+        \textbf{8}                    & 1            & 2             & 22           & 28           & 1            & 20           & 0            & \textbf{889} & 16           & 65           \\ \hline
+        \textbf{9}                    & 7            & 18            & 42           & 17           & 11           & 66           & 8            & 2            & \textbf{749} & 9            \\ \hline
+        \textbf{0}                    & 1            & 0             & 3            & 10           & 49           & 24           & 0            & 47           & 21           & \textbf{820} \\ \hline
+    \end{tabular}
+    \caption{Mratiz Confusão}
+    \label{table1}
+\end{table}
+
+\subsubsection{Derivações da Matriz Confusão}
+Definições em \url{https://en.wikipedia.org/wiki/Confusion_matrix}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+        \cline{2-11}
+        \hline
+        \tiny
+        \backslashbox{Condição}{Classe}    & \textbf{1}                      & \textbf{2}                      & \textbf{3}                      & \textbf{4}                      & \textbf{5}                      & \textbf{6}                      & \textbf{7}                      & \textbf{8}                      & \textbf{9}                      & \textbf{0}                      \\ \hline
+        \multicolumn{1}{|l|}{\textbf{P}}   & 980                             & 1135                            & 1032                            & 1010                            & 982                             & 892                             & 958                             & 1028                            & 974                             & 1009                            \\ \hline
+        \multicolumn{1}{|l|}{\textbf{N}}   & 9020                            & 8865                            & 8968                            & 8990                            & 9018                            & 9108                            & 9042                            & 8972                            & 9026                            & 8991                            \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TP}}  & 940                             & 1105                            & 825                             & 886                             & 877                             & 598                             & 888                             & 889                             & 749                             & 820                             \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TN}}  & 7637                            & 7472                            & 7752                            & 7691                            & 7700                            & 7979                            & 7689                            & 7688                            & 7828                            & 7757                            \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FP}}  & 96                              & 241                             & 73                              & 175                             & 159                             & 74                              & 115                             & 155                             & 180                             & 155                             \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FN}}  & 40                              & 30                              & 207                             & 124                             & 105                             & 294                             & 70                              & 139                             & 225                             & 189                             \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TPR}} & \cellcolor[HTML]{9AFF99}95.91\% & \cellcolor[HTML]{9AFF99}97.35\% & \cellcolor[HTML]{FFFFC7}79.94\% & \cellcolor[HTML]{9AFF99}87.72\% & \cellcolor[HTML]{9AFF99}89.30\% & \cellcolor[HTML]{FFCCC9}67.04\% & \cellcolor[HTML]{9AFF99}92.69\% & \cellcolor[HTML]{9AFF99}86.47\% & \cellcolor[HTML]{FFFFC7}76.89\% & \cellcolor[HTML]{FFFFC7}81.26\% \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TNR}} & \cellcolor[HTML]{FFFFC7}84.66\% & \cellcolor[HTML]{FFFFC7}84.28\% & \cellcolor[HTML]{9AFF99}86.44\% & \cellcolor[HTML]{9AFF99}85.55\% & \cellcolor[HTML]{9AFF99}85.38\% & \cellcolor[HTML]{9AFF99}87.60\% & \cellcolor[HTML]{9AFF99}85.03\% & \cellcolor[HTML]{9AFF99}85.68\% & \cellcolor[HTML]{9AFF99}86.72\% & \cellcolor[HTML]{9AFF99}86.27\% \\ \hline
+        \multicolumn{1}{|l|}{\textbf{PPV}} & 90.73\%                         & 82.09\%                         & 91.87\%                         & 83.50\%                         & 84.65\%                         & 88.98\%                         & 88.55\%                         & 85.15\%                         & 80.62\%                         & 84.10\%                         \\ \hline
+        \multicolumn{1}{|l|}{\textbf{NPV}} & 99.47\%                         & 99.60\%                         & 97.39\%                         & 98.41\%                         & 98.65\%                         & 96.44\%                         & 99.09\%                         & 98.22\%                         & 97.20\%                         & 97.62\%                         \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FNR}} & \cellcolor[HTML]{9AFF99}4.08\%  & \cellcolor[HTML]{9AFF99}2.64\%  & \cellcolor[HTML]{FFFFC7}20.05\% & \cellcolor[HTML]{9AFF99}12.27\% & \cellcolor[HTML]{9AFF99}10.29\% & \cellcolor[HTML]{FFCCC9}32.95\% & \cellcolor[HTML]{9AFF99}7.30\%  & \cellcolor[HTML]{9AFF99}13.52\% & \cellcolor[HTML]{FFFFC7}23.10\% & \cellcolor[HTML]{FFFFC7}18.73\% \\ \hline
+    \end{tabular}
+    \caption{Derivações da Matriz Confusão}
+    \label{table2}
+\end{table}
+%------------------------------------------------
+
+\subsubsection{Exemplos de classificações equivocadas}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/err1.png}}
+        \caption{Amostra \#11  \\ Classe Real: 6 \\ Predição do classificador: 4}
+        \label{fig:fig20}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/err2.png}}
+        \caption{Amostra \#33  \\ Classe Real: 4 \\ Predição do classificador: 0}
+        \label{fig:fig21}
+    \end{subfigure}%
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/err3.png}}
+        \caption{Amostra \#38  \\ Classe Real: 2 \\ Predição do classificador: 3}
+        \label{fig:fig22}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/err4.png}}
+        \caption{Amostra \#45  \\ Classe Real: 5 \\ Predição do classificador: 3}
+        \label{fig:fig23}
+    \end{subfigure}%
+\end{figure}
+
+\subsection{Análises}
+
+\subsubsection{Quais são os dois dígitos mais desafiadores para o classificador linear?}
+
+Por meio das tabelas \ref{table1} e \ref{table2} pode-se inferir que os digitos mais problemáticos são os 6, e o 9; sendo que o pior é o 6. A taxa de erro para o classificador do digito 6 foi de 32.95\%, enquanto para o digito 9 foi de 23.10\%. A linha e coluna 6 (referente ao classificador do digito 6) sugere que que ocorreram 294 ocorrências de "Falsos Negativos", o pior resultado dentre os demais classificadores. Ou seja, o classificador teve em sua entrada um 6 mas reportou que aquilo nao era um 6. No caso de Falsos Positivos, vê-se que o mesmo classificador teve o segundo melhor desempenho. Resumindo, dado um 6 real, o classificador tem uma certa dificuldade em dizer que aquilo é realmente um 6; mas dado um outro digito qualquer, o classificador tem uma boa certeza de que aquilo não é um 6. Uma possível explicação para esse comportamento seria de que o digito 6 e o 9 apresentam traços muito neutros (que ocorreriam também em outros digitos) e, principalmente, não teriam caracteristicas unicas que os destoacem dos demais.
+
+\subsubsection{A adoção de um índice de regularização distinto para cada classe (em lugar de um único índice para todas as classes) pode conduzir a um ganho de desempenho?}
+Sim. O treinamento de cada classificador é um problema que independente do treinamentodos dos demais e por isso, procurar um \textlambda  para cada classificador poderia potencialmente melhorar o desempenho para aquele classificador. Ditar que o \textlambda  deve ser o mesmo para todos os classificadores é uma arbitrariedade e pode ser vista como uma "restrição" extra no problema de otimização. Vale lembrar que no caso de procurar-se um \textlambda  para cada classificador, estaria-se resolvendo 10 problemas de otimização, enquanto no caso do \textlambda unico, estaria-se resolvendo um problema somente. Ao procurar um único \textlambda, esta-se selecionando o valor que oferece o melhor trade-off dentre todos os classificadores, ou seja, um valor que atenda a todos os classificadores razoavelmente mas nenhum de forma otima.
+
+\subsubsection{Apresente o motivo pelo qual o gráfico não é côncavo, como se deveria esperar, apresentando algumas oscilações.}
+É desejado que a função a ser maximizada seja concava pois isso implica que há um unico máximo global. Esse fato torma sua computação mais simples e escalável pois podemos aplicar a condição suficiente de otimalidade. No caso apresentado, vemos que alguns máximos locais alem do máximo global, tornando assim, a função não concava. Se os parametros livres do modelo não possuem uma relação linear com a saida, temos que o problema deixa de ser convexo/concavo. Portanto, o grafico sugere que há uma relação não linear entre os parametros livres e o comportamento da saída.
+% solução forma fechada, otimo global
+
+\subsubsection{Interprete o que se pode extrair desses mapas de calor.}
+Por meio dos mapas de calor pode-se ver como cada pixels estaria afetando a saída do classificador. Se um pixel tem cores mais claras, tem-se que aquele pixel tem peso elevado na combinação linear que gera a saida do classificador. No caso de pixels escuros, tem-se pixels que geram penalidade na saida do classificador. Dessa forma pode-se ver, dado um digito qualquer, quais zonas da imagem são mais ou menos ativas para aquela classe segundo o conjunto de dados usado pro treino.
+
+\section{CIFAR10: Síntese de modelos lineares para classificação de padrões}
+
+\subsection{Busca por coeficientes de normalização}
+\subsubsection{Busca grossa}
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/cifar10/crude.png}}
+    \caption{Perfomance do classificador para cada valor utilziado de 'c'}  % Poe um texto na parte de baixo da figura.
+    \label{fig:fig1}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\subsubsection{Busca fina}
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/cifar10/fine.png}}
+    \caption{Perfomance do classificador para cada valor utilziado de 'c'}  % Poe um texto na parte de baixo da figura.
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+
+\subsubsection{Resultado}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Busca} & \textbf{Melhor valor de c} & \textbf{Desempenho} \\ \hline
+        Grossa         & 256                        & 0.3977              \\ \hline
+        Fina           & 352                        & 0.398               \\ \hline
+    \end{tabular}
+\end{table}
+
+
+\subsection{Mapas de calor}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/color1.png}}
+        \caption{Classificador para classe 1}
+        \label{fig:fig3}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/color2.png}}
+        \caption{Classificador para classe 2}
+        \label{fig:fig4}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/color3.png}}
+        \caption{Classificador para classe 3}
+        \label{fig:fig5}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/color4.png}}
+        \caption{Classificador para classe 4}
+        \label{fig:fig6}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/color5.png}}
+        \caption{Classificador para classe 5}
+        \label{fig:fig7}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/color6.png}}
+        \caption{Classificador para classe 6}
+        \label{fig:fig8}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/color7.png}}
+        \caption{Classificador para classe 7}
+        \label{fig:fig9}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/color8.png}}
+        \caption{Classificador para classe 8}
+        \label{fig:fig10}
+    \end{subfigure}%
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/color9.png}}
+        \caption{Classificador para classe 9}
+        \label{fig:fig11}
+    \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.33\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/color10.png}}
+        \caption{Classificador para classe 10}
+        \label{fig:fig12}
+    \end{subfigure}%
+\end{figure}
+
+\subsection{Classificação do conjunto de Teste}
+
+Valor de \textbf{c} utilizado: \textbf{352} \\
+Desempenho obtido: \textbf{40.07\%}
+
+\subsubsection{Matriz Confusão}
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+        \hline
+        \tiny
+        \backslashbox{Predição}{Real} & \textbf{1}                  & \textbf{2}                  & \textbf{3}                  & \textbf{4}                  & \textbf{5}                  & \textbf{6}                 & \textbf{7}                  & \textbf{8}                  & \textbf{9}                  & \textbf{0}                  \\ \hline
+        \textbf{1}                    & 498                         & 69                          & 126                         & 65                          & 70                          & 34                         & 22                          & 48                          & 142                         & 76                          \\ \hline
+        \textbf{2}                    & 48                          & 493                         & 52                          & 79                          & 38                          & 68                         & 61                          & 66                          & 87                          & 196                         \\ \hline
+        \textbf{3}                    & 28                          & 6                           & 225                         & 70                          & 107                         & 77                         & 60                          & 47                          & 5                           & 12                          \\ \hline
+        \textbf{4}                    & 22                          & 18                          & 65                          & 168                         & 49                          & 118                        & 71                          & 33                          & 10                          & 11                          \\ \hline
+        \textbf{5}                    & 17                          & 13                          & 96                          & 40                          & 266                         & 64                         & 83                          & 57                          & 5                           & 9                           \\ \hline
+        \textbf{6}                    & 23                          & 34                          & 89                          & 218                         & 84                          & 346                        & 78                          & 79                          & 38                          & 23                          \\ \hline
+        \textbf{7}                    & \cellcolor[HTML]{FFFFFF}30  & \cellcolor[HTML]{FFFFFF}32  & \cellcolor[HTML]{FFFFFF}153 & \cellcolor[HTML]{FFFFFF}147 & \cellcolor[HTML]{FFFFFF}164 & \cellcolor[HTML]{FFFFFF}89 & \cellcolor[HTML]{FFFFFF}507 & \cellcolor[HTML]{FFFFFF}37  & \cellcolor[HTML]{FFFFFF}18  & \cellcolor[HTML]{FFFFFF}51  \\ \hline
+        \textbf{8}                    & \cellcolor[HTML]{FFFFFF}57  & \cellcolor[HTML]{FFFFFF}60  & \cellcolor[HTML]{FFFFFF}92  & \cellcolor[HTML]{FFFFFF}59  & \cellcolor[HTML]{FFFFFF}141 & \cellcolor[HTML]{FFFFFF}86 & \cellcolor[HTML]{FFFFFF}49  & \cellcolor[HTML]{FFFFFF}466 & \cellcolor[HTML]{FFFFFF}20  & \cellcolor[HTML]{FFFFFF}51  \\ \hline
+        \textbf{9}                    & \cellcolor[HTML]{FFFFFF}185 & \cellcolor[HTML]{FFFFFF}107 & \cellcolor[HTML]{FFFFFF}63  & \cellcolor[HTML]{FFFFFF}69  & \cellcolor[HTML]{FFFFFF}39  & \cellcolor[HTML]{FFFFFF}69 & \cellcolor[HTML]{FFFFFF}30  & \cellcolor[HTML]{FFFFFF}58  & \cellcolor[HTML]{FFFFFF}572 & \cellcolor[HTML]{FFFFFF}105 \\ \hline
+        \textbf{0}                    & \cellcolor[HTML]{FFFFFF}92  & \cellcolor[HTML]{FFFFFF}168 & \cellcolor[HTML]{FFFFFF}39  & \cellcolor[HTML]{FFFFFF}85  & \cellcolor[HTML]{FFFFFF}42  & \cellcolor[HTML]{FFFFFF}49 & \cellcolor[HTML]{FFFFFF}39  & \cellcolor[HTML]{FFFFFF}109 & \cellcolor[HTML]{FFFFFF}103 & \cellcolor[HTML]{FFFFFF}466 \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Derivações da Matriz Confusão}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|l|l|l|l|l|l|l|l|l|l|}
+        \cline{2-11}
+                                           & \textbf{1}                    & \textbf{2}                    & \textbf{3}                    & \textbf{4}                    & \textbf{5}                    & \textbf{6}                    & \textbf{7}                    & \textbf{8}                    & \textbf{9}                    & \textbf{0}                    \\ \hline
+        \multicolumn{1}{|l|}{\textbf{P}}   & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          \\ \hline
+        \multicolumn{1}{|l|}{\textbf{N}}   & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TP}}  & 498                           & 493                           & 225                           & 168                           & 266                           & 346                           & 507                           & 466                           & 572                           & 466                           \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TN}}  & 3509                          & 3514                          & 3782                          & 3839                          & 3741                          & 3661                          & 3500                          & 3541                          & 3435                          & 3541                          \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FP}}  & 652                           & 695                           & 412                           & 397                           & 384                           & 666                           & 721                           & 615                           & 725                           & 726                           \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FN}}  & 502                           & 507                           & 775                           & 832                           & 734                           & 654                           & 493                           & 534                           & 428                           & 534                           \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TPR}} & \cellcolor[HTML]{FFCCC9}0.498 & \cellcolor[HTML]{FFCCC9}0.493 & \cellcolor[HTML]{FD6864}0.225 & \cellcolor[HTML]{FD6864}0.168 & \cellcolor[HTML]{FD6864}0.266 & \cellcolor[HTML]{FD6864}0.346 & \cellcolor[HTML]{FFCCC9}0.507 & \cellcolor[HTML]{FFCCC9}0.466 & \cellcolor[HTML]{FFCCC9}0.572 & \cellcolor[HTML]{FFCCC9}0.466 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TNR}} & \cellcolor[HTML]{FFFFFF}0.389 & \cellcolor[HTML]{FFFFFF}0.390 & \cellcolor[HTML]{FFFFFF}0.420 & \cellcolor[HTML]{FFFFFF}0.426 & \cellcolor[HTML]{FFFFFF}0.415 & \cellcolor[HTML]{FFFFFF}0.406 & \cellcolor[HTML]{FFFFFF}0.388 & \cellcolor[HTML]{FFFFFF}0.393 & \cellcolor[HTML]{FFFFFF}0.381 & \cellcolor[HTML]{FFFFFF}0.393 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{PPV}} & \cellcolor[HTML]{FFFFFF}0.433 & \cellcolor[HTML]{FFFFFF}0.414 & \cellcolor[HTML]{FFFFFF}0.353 & \cellcolor[HTML]{FFFFFF}0.297 & \cellcolor[HTML]{FFFFFF}0.409 & \cellcolor[HTML]{FFFFFF}0.341 & \cellcolor[HTML]{FFFFFF}0.412 & \cellcolor[HTML]{FFFFFF}0.431 & \cellcolor[HTML]{FFFFFF}0.441 & \cellcolor[HTML]{FFFFFF}0.390 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{NPV}} & \cellcolor[HTML]{FFFFFF}0.874 & \cellcolor[HTML]{FFFFFF}0.873 & \cellcolor[HTML]{FFFFFF}0.829 & \cellcolor[HTML]{FFFFFF}0.821 & \cellcolor[HTML]{FFFFFF}0.835 & \cellcolor[HTML]{FFFFFF}0.848 & \cellcolor[HTML]{FFFFFF}0.876 & \cellcolor[HTML]{FFFFFF}0.868 & \cellcolor[HTML]{FFFFFF}0.889 & \cellcolor[HTML]{FFFFFF}0.868 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FNR}} & \cellcolor[HTML]{FFCCC9}0.502 & \cellcolor[HTML]{FFCCC9}0.507 & \cellcolor[HTML]{FD6864}0.775 & \cellcolor[HTML]{FD6864}0.832 & \cellcolor[HTML]{FD6864}0.734 & \cellcolor[HTML]{FD6864}0.654 & \cellcolor[HTML]{FFCCC9}0.493 & \cellcolor[HTML]{FFCCC9}0.534 & \cellcolor[HTML]{FFCCC9}0.428 & \cellcolor[HTML]{FFCCC9}0.534 \\ \hline
+    \end{tabular}
+\end{table}
+
+
+\subsubsection{Exemplos de classificações equivocadas}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/err1.png}}
+        \caption{Amostra \#1  \\ Classe Real: 8 (Barco) \\ Predição do classificador: 9 (Caminhão)}
+        \label{fig:fig20}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/err2.png}}
+        \caption{Amostra \#4  \\ Classe Real: 6 (Sapo) \\ Predição do classificador: 4 (Veado)}
+        \label{fig:fig21}
+    \end{subfigure}%
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/err3.png}}
+        \caption{Amostra \#6  \\ Classe Real: 1 (Carro) \\ Predição do classificador: 3 (Gato)}
+        \label{fig:fig22}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/err4.png}}
+        \caption{Amostra \#8  \\ Classe Real: 3 (Gato) \\ Predição do classificador: 5 (Cachorro)}
+        \label{fig:fig23}
+    \end{subfigure}%
+\end{figure}
+
+% airplane 0										
+% automobile 1										
+% bird		2								
+% cat		3								
+% deer		4								
+% dog		5								
+% frog		6								
+% horse		7								
+% ship		8								
+% truck     9
+
+
+\subsection{Análises}
+\subsubsection{Interprete os mapas de cores apresentados ao final e associe esta interpretação com o baixo desempenho produzido pelos classificadores lineares.}
+Para o tipo de dados do problema MNIST, um único filtro linear foi suficiente para obter-se resultados de alta precisão. No entanto, conforme os dados vão ficando mais ricos, um único filtro não é mais suficiente pois ele passa a ser incapaz de incorporar as nuances dos dados. Por exemplo, um carro no problema CIFAR10 pode aparecer de diferentes formas (cores, orientação, escala, ertc) e por isso um classificador composto por um unico filtro terá de se basear numa média de todas essas propriedades. Nos mapas de cor da base CIFAR10 não uma interpretação tão clara como no caso dos mapas de calor da base MNIST, justamente pois o classificador está com dificuldade de incorporar a essencia de cada classe nesse único grau de liberdade.
+
+
+\section{MNIST: Síntese de modelos não-lineares, mas lineares nos parâmetros ajustáveis}
+
+\subsection{Busca por coeficientes de normalização}
+
+\subsubsection{Busca grossa}
+
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/crude_elm.png}}
+    \caption{Perfomance do classificador para cada valor utilziado de 'c'}  % Poe um texto na parte de baixo da figura.
+    \label{fig:fig1}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\subsubsection{Busca fina}
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/fine_elm.png}}
+    \caption{Perfomance do classificador para cada valor utilziado de 'c'}  % Poe um texto na parte de baixo da figura.
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\subsubsection{Resultado}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Busca} & \textbf{Melhor valor de c} & \textbf{Desempenho} \\ \hline
+        Grossa         & 64                         & 0.9411              \\ \hline
+        Fina           & 88                         & 0.9413              \\ \hline
+    \end{tabular}
+\end{table}
+
+
+\subsection{Classificação do conjunto de Teste}
+
+Valor de \textbf{c} utilizado: \textbf{88} \\
+Desempenho obtido: \textbf{94.45\%}
+
+
+\subsubsection{Matriz Confusão}
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+        \hline
+        \tiny
+        \backslashbox{Predição}{Real} & \textbf{1}                & \textbf{2}                & \textbf{3}                 & \textbf{4}                 & \textbf{5}                 & \textbf{6}                 & \textbf{7}                  & \textbf{8}                  & \textbf{9}                  & \textbf{0}                  \\ \hline
+        \textbf{1}                    & 961                       & 0                         & 5                          & 0                          & 0                          & 7                          & 9                           & 2                           & 9                           & 6                           \\ \hline
+        \textbf{2}                    & 1                         & 1123                      & 2                          & 0                          & 7                          & 0                          & 4                           & 16                          & 3                           & 8                           \\ \hline
+        \textbf{3}                    & 2                         & 3                         & 955                        & 8                          & 8                          & 1                          & 0                           & 16                          & 4                           & 1                           \\ \hline
+        \textbf{4}                    & 1                         & 1                         & 14                         & 947                        & 0                          & 17                         & 0                           & 2                           & 13                          & 9                           \\ \hline
+        \textbf{5}                    & 0                         & 1                         & 6                          & 2                          & 929                        & 2                          & 7                           & 9                           & 8                           & 21                          \\ \hline
+        \textbf{6}                    & 4                         & 0                         & 4                          & 14                         & 0                          & 822                        & 16                          & 0                           & 17                          & 9                           \\ \hline
+        \textbf{7}                    & \cellcolor[HTML]{FFFFFF}7 & \cellcolor[HTML]{FFFFFF}4 & \cellcolor[HTML]{FFFFFF}7  & \cellcolor[HTML]{FFFFFF}1  & \cellcolor[HTML]{FFFFFF}7  & \cellcolor[HTML]{FFFFFF}20 & \cellcolor[HTML]{FFFFFF}919 & \cellcolor[HTML]{FFFFFF}1   & \cellcolor[HTML]{FFFFFF}8   & \cellcolor[HTML]{FFFFFF}0   \\ \hline
+        \textbf{8}                    & \cellcolor[HTML]{FFFFFF}1 & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}9  & \cellcolor[HTML]{FFFFFF}10 & \cellcolor[HTML]{FFFFFF}1  & \cellcolor[HTML]{FFFFFF}7  & \cellcolor[HTML]{FFFFFF}0   & \cellcolor[HTML]{FFFFFF}961 & \cellcolor[HTML]{FFFFFF}8   & \cellcolor[HTML]{FFFFFF}11  \\ \hline
+        \textbf{9}                    & \cellcolor[HTML]{FFFFFF}3 & \cellcolor[HTML]{FFFFFF}3 & \cellcolor[HTML]{FFFFFF}27 & \cellcolor[HTML]{FFFFFF}19 & \cellcolor[HTML]{FFFFFF}3  & \cellcolor[HTML]{FFFFFF}10 & \cellcolor[HTML]{FFFFFF}3   & \cellcolor[HTML]{FFFFFF}1   & \cellcolor[HTML]{FFFFFF}895 & \cellcolor[HTML]{FFFFFF}11  \\ \hline
+        \textbf{0}                    & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}0 & \cellcolor[HTML]{FFFFFF}3  & \cellcolor[HTML]{FFFFFF}9  & \cellcolor[HTML]{FFFFFF}27 & \cellcolor[HTML]{FFFFFF}6  & \cellcolor[HTML]{FFFFFF}0   & \cellcolor[HTML]{FFFFFF}20  & \cellcolor[HTML]{FFFFFF}9   & \cellcolor[HTML]{FFFFFF}933 \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Derivações da Matriz Confusão}
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+        \cline{2-11}
+        \hline
+        \tiny
+        \backslashbox{Condição}{Classe}    & \textbf{1}                     & \textbf{2}                     & \textbf{3}                     & \textbf{4}                     & \textbf{5}                     & \textbf{6}                     & \textbf{7}                     & \textbf{8}                     & \textbf{9}                     & \textbf{0}                     \\ \hline
+        \multicolumn{1}{|l|}{\textbf{P}}   & 980                            & 1135                           & 1032                           & 1010                           & 982                            & 892                            & 958                            & 1028                           & 974                            & 1009                           \\ \hline
+        \multicolumn{1}{|l|}{\textbf{N}}   & 9020                           & 8865                           & 8968                           & 8990                           & 9018                           & 9108                           & 9042                           & 8972                           & 9026                           & 8991                           \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TP}}  & 961                            & 1123                           & 955                            & 947                            & 929                            & 822                            & 919                            & 961                            & 895                            & 933                            \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TN}}  & 8484                           & 8322                           & 8490                           & 8498                           & 8516                           & 8623                           & 8526                           & 8484                           & 8550                           & 8512                           \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FP}}  & 38                             & 41                             & 43                             & 57                             & 56                             & 64                             & 55                             & 47                             & 80                             & 74                             \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FN}}  & 9                              & 12                             & 77                             & 63                             & 53                             & 70                             & 39                             & 67                             & 79                             & 76                             \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TPR}} & \cellcolor[HTML]{9AFF99}0.9806 & \cellcolor[HTML]{9AFF99}0.9894 & \cellcolor[HTML]{9AFF99}0.9253 & \cellcolor[HTML]{9AFF99}0.9376 & \cellcolor[HTML]{9AFF99}0.9460 & \cellcolor[HTML]{9AFF99}0.9215 & \cellcolor[HTML]{9AFF99}0.9592 & \cellcolor[HTML]{9AFF99}0.9348 & \cellcolor[HTML]{9AFF99}0.9188 & \cellcolor[HTML]{9AFF99}0.9246 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TNR}} & \cellcolor[HTML]{FFFFFF}0.9405 & \cellcolor[HTML]{FFFFFF}0.9387 & \cellcolor[HTML]{FFFFFF}0.9466 & \cellcolor[HTML]{FFFFFF}0.9452 & \cellcolor[HTML]{FFFFFF}0.9443 & \cellcolor[HTML]{FFFFFF}0.9467 & \cellcolor[HTML]{FFFFFF}0.9429 & \cellcolor[HTML]{FFFFFF}0.9456 & \cellcolor[HTML]{FFFFFF}0.9472 & \cellcolor[HTML]{FFFFFF}0.9467 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{PPV}} & \cellcolor[HTML]{FFFFFF}0.9619 & \cellcolor[HTML]{FFFFFF}0.9647 & \cellcolor[HTML]{FFFFFF}0.9569 & \cellcolor[HTML]{FFFFFF}0.9432 & \cellcolor[HTML]{FFFFFF}0.9431 & \cellcolor[HTML]{FFFFFF}0.9277 & \cellcolor[HTML]{FFFFFF}0.9435 & \cellcolor[HTML]{FFFFFF}0.9533 & \cellcolor[HTML]{FFFFFF}0.9179 & \cellcolor[HTML]{FFFFFF}0.9265 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{NPV}} & \cellcolor[HTML]{FFFFFF}0.9977 & \cellcolor[HTML]{FFFFFF}0.9985 & \cellcolor[HTML]{FFFFFF}0.9910 & \cellcolor[HTML]{FFFFFF}0.9926 & \cellcolor[HTML]{FFFFFF}0.9938 & \cellcolor[HTML]{FFFFFF}0.9919 & \cellcolor[HTML]{FFFFFF}0.9954 & \cellcolor[HTML]{FFFFFF}0.9921 & \cellcolor[HTML]{FFFFFF}0.9908 & \cellcolor[HTML]{FFFFFF}0.9911 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FNR}} & \cellcolor[HTML]{9AFF99}0.0193 & \cellcolor[HTML]{9AFF99}0.0105 & \cellcolor[HTML]{9AFF99}0.0746 & \cellcolor[HTML]{9AFF99}0.0623 & \cellcolor[HTML]{9AFF99}0.0539 & \cellcolor[HTML]{9AFF99}0.0784 & \cellcolor[HTML]{9AFF99}0.0407 & \cellcolor[HTML]{9AFF99}0.0651 & \cellcolor[HTML]{9AFF99}0.0811 & \cellcolor[HTML]{9AFF99}0.0753 \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Exemplos de classificações equivocadas}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/err1_elm.png}}
+        \caption{Amostra \#33  \\ Classe Real: 4 \\ Predição do classificador: 0}
+        \label{fig:fig20}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/err2_elm.png}}
+        \caption{Amostra \#63  \\ Classe Real: 3 \\ Predição do classificador: 2}
+        \label{fig:fig21}
+    \end{subfigure}%
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/err3_elm.png}}
+        \caption{Amostra \#92  \\ Classe Real: 9 \\ Predição do classificador: 4}
+        \label{fig:fig22}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/err4_elm.png}}
+        \caption{Amostra \#119  \\ Classe Real: 2 \\ Predição do classificador: 2}
+        \label{fig:fig23}
+    \end{subfigure}%
+\end{figure}
+
+
+
+\section{CIFAR10: Síntese de modelos não-lineares, mas lineares nos parâmetros ajustáveis}
+
+
+\subsubsection{Busca grossa}
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/cifar10/crude_elm.png}}
+    \caption{Perfomance do classificador para cada valor utilziado de 'c'}  % Poe um texto na parte de baixo da figura.
+    \label{fig:fig1}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\subsubsection{Busca fina}
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/cifar10/fine_elm.png}}
+    \caption{Perfomance do classificador para cada valor utilziado de 'c'}  % Poe um texto na parte de baixo da figura.
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+
+\subsubsection{Resultado}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Busca} & \textbf{Melhor valor de c} & \textbf{Desempenho} \\ \hline
+        Grossa         & 16                         & 0.446               \\ \hline
+        Fina           & 10                         & 0.4466              \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Classificação do conjunto de Teste}
+
+Valor de \textbf{c} utilizado: \textbf{10} \\
+Desempenho obtido: \textbf{45.37\%}
+
+\subsubsection{Matriz Confusão}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|}
+        \hline
+                   & \textbf{1}                  & \textbf{2}                  & \textbf{3}                  & \textbf{4}                  & \textbf{5}                  & \textbf{6}                  & \textbf{7}                  & \textbf{8}                  & \textbf{9}                  & \textbf{0}                  \\ \hline
+        \textbf{1} & 523                         & 33                          & 110                         & 57                          & 70                          & 36                          & 16                          & 31                          & 106                         & 40                          \\ \hline
+        \textbf{2} & 42                          & 559                         & 39                          & 63                          & 32                          & 39                          & 25                          & 51                          & 70                          & 187                         \\ \hline
+        \textbf{3} & 41                          & 13                          & 307                         & 64                          & 130                         & 93                          & 76                          & 49                          & 7                           & 7                           \\ \hline
+        \textbf{4} & 13                          & 24                          & 67                          & 238                         & 46                          & 151                         & 60                          & 47                          & 14                          & 22                          \\ \hline
+        \textbf{5} & 23                          & 11                          & 108                         & 58                          & 344                         & 65                          & 93                          & 68                          & 10                          & 10                          \\ \hline
+        \textbf{6} & 16                          & 20                          & 79                          & 178                         & 55                          & 342                         & 60                          & 69                          & 41                          & 27                          \\ \hline
+        \textbf{7} & \cellcolor[HTML]{FFFFFF}26  & \cellcolor[HTML]{FFFFFF}29  & \cellcolor[HTML]{FFFFFF}139 & \cellcolor[HTML]{FFFFFF}144 & \cellcolor[HTML]{FFFFFF}148 & \cellcolor[HTML]{FFFFFF}110 & \cellcolor[HTML]{FFFFFF}563 & \cellcolor[HTML]{FFFFFF}49  & \cellcolor[HTML]{FFFFFF}15  & \cellcolor[HTML]{FFFFFF}38  \\ \hline
+        \textbf{8} & \cellcolor[HTML]{FFFFFF}48  & \cellcolor[HTML]{FFFFFF}38  & \cellcolor[HTML]{FFFFFF}72  & \cellcolor[HTML]{FFFFFF}83  & \cellcolor[HTML]{FFFFFF}98  & \cellcolor[HTML]{FFFFFF}72  & \cellcolor[HTML]{FFFFFF}58  & \cellcolor[HTML]{FFFFFF}503 & \cellcolor[HTML]{FFFFFF}21  & \cellcolor[HTML]{FFFFFF}48  \\ \hline
+        \textbf{9} & \cellcolor[HTML]{FFFFFF}203 & \cellcolor[HTML]{FFFFFF}92  & \cellcolor[HTML]{FFFFFF}48  & \cellcolor[HTML]{FFFFFF}46  & \cellcolor[HTML]{FFFFFF}46  & \cellcolor[HTML]{FFFFFF}50  & \cellcolor[HTML]{FFFFFF}22  & \cellcolor[HTML]{FFFFFF}45  & \cellcolor[HTML]{FFFFFF}641 & \cellcolor[HTML]{FFFFFF}104 \\ \hline
+        \textbf{0} & \cellcolor[HTML]{FFFFFF}65  & \cellcolor[HTML]{FFFFFF}181 & \cellcolor[HTML]{FFFFFF}31  & \cellcolor[HTML]{FFFFFF}69  & \cellcolor[HTML]{FFFFFF}31  & \cellcolor[HTML]{FFFFFF}42  & \cellcolor[HTML]{FFFFFF}27  & \cellcolor[HTML]{FFFFFF}88  & \cellcolor[HTML]{FFFFFF}75  & \cellcolor[HTML]{FFFFFF}517 \\ \hline
+    \end{tabular}
+\end{table}
+
+
+\subsubsection{Derivações da Matriz Confusão}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|l|l|l|l|l|l|l|l|l|l|}
+        \cline{2-11}
+                                           & \textbf{1}                    & \textbf{2}                    & \textbf{3}                    & \textbf{4}                    & \textbf{5}                    & \textbf{6}                    & \textbf{7}                    & \textbf{8}                    & \textbf{9}                    & \textbf{0}                    \\ \hline
+        \multicolumn{1}{|l|}{\textbf{P}}   & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          & 1000                          \\ \hline
+        \multicolumn{1}{|l|}{\textbf{N}}   & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          & 9000                          \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TP}}  & 523                           & 559                           & 307                           & 238                           & 344                           & 342                           & 563                           & 503                           & 641                           & 517                           \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TN}}  & 4014                          & 3978                          & 4230                          & 4299                          & 4193                          & 4195                          & 3974                          & 4034                          & 3896                          & 4020                          \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FP}}  & 499                           & 548                           & 480                           & 444                           & 446                           & 545                           & 698                           & 538                           & 656                           & 609                           \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FN}}  & 477                           & 441                           & 693                           & 762                           & 656                           & 658                           & 437                           & 497                           & 359                           & 483                           \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TPR}} & \cellcolor[HTML]{FFCCC9}0.523 & \cellcolor[HTML]{FFCCC9}0.559 & \cellcolor[HTML]{FD6864}0.307 & \cellcolor[HTML]{FD6864}0.238 & \cellcolor[HTML]{FD6864}0.344 & \cellcolor[HTML]{FD6864}0.342 & \cellcolor[HTML]{FFCCC9}0.563 & \cellcolor[HTML]{FFCCC9}0.503 & \cellcolor[HTML]{FFCCC9}0.641 & \cellcolor[HTML]{FFCCC9}0.517 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{TNR}} & \cellcolor[HTML]{FFFFFF}0.446 & \cellcolor[HTML]{FFFFFF}0.442 & \cellcolor[HTML]{FFFFFF}0.47  & \cellcolor[HTML]{FFFFFF}0.477 & \cellcolor[HTML]{FFFFFF}0.465 & \cellcolor[HTML]{FFFFFF}0.466 & \cellcolor[HTML]{FFFFFF}0.441 & \cellcolor[HTML]{FFFFFF}0.448 & \cellcolor[HTML]{FFFFFF}0.432 & \cellcolor[HTML]{FFFFFF}0.446 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{PPV}} & \cellcolor[HTML]{FFFFFF}0.511 & \cellcolor[HTML]{FFFFFF}0.504 & \cellcolor[HTML]{FFFFFF}0.390 & \cellcolor[HTML]{FFFFFF}0.348 & \cellcolor[HTML]{FFFFFF}0.435 & \cellcolor[HTML]{FFFFFF}0.385 & \cellcolor[HTML]{FFFFFF}0.446 & \cellcolor[HTML]{FFFFFF}0.483 & \cellcolor[HTML]{FFFFFF}0.494 & \cellcolor[HTML]{FFFFFF}0.459 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{NPV}} & \cellcolor[HTML]{FFFFFF}0.893 & \cellcolor[HTML]{FFFFFF}0.900 & \cellcolor[HTML]{FFFFFF}0.859 & \cellcolor[HTML]{FFFFFF}0.849 & \cellcolor[HTML]{FFFFFF}0.864 & \cellcolor[HTML]{FFFFFF}0.864 & \cellcolor[HTML]{FFFFFF}0.900 & \cellcolor[HTML]{FFFFFF}0.890 & \cellcolor[HTML]{FFFFFF}0.915 & \cellcolor[HTML]{FFFFFF}0.892 \\ \hline
+        \multicolumn{1}{|l|}{\textbf{FNR}} & \cellcolor[HTML]{FFCCC9}0.477 & \cellcolor[HTML]{FFCCC9}0.441 & \cellcolor[HTML]{FD6864}0.693 & \cellcolor[HTML]{FD6864}0.762 & \cellcolor[HTML]{FD6864}0.656 & \cellcolor[HTML]{FD6864}0.658 & \cellcolor[HTML]{FFCCC9}0.437 & \cellcolor[HTML]{FFCCC9}0.497 & \cellcolor[HTML]{FFCCC9}0.359 & \cellcolor[HTML]{FFCCC9}0.483 \\ \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Exemplos de classificações equivocadas}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/err1.png}}
+        \caption{Amostra \#1  \\ Classe Real: 8 (Barco) \\ Predição do classificador: 9 (Caminhão)}
+        \label{fig:fig20}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/err2.png}}
+        \caption{Amostra \#4  \\ Classe Real: 6 (Sapo) \\ Predição do classificador: 4 (Veado)}
+        \label{fig:fig21}
+    \end{subfigure}%
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/err3.png}}
+        \caption{Amostra \#6  \\ Classe Real: 1 (Carro) \\ Predição do classificador: 3 (Gato)}
+        \label{fig:fig22}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centerline{\includegraphics[width=2in]{media/cifar10/err5.png}}
+        \caption{Amostra \#4  \\ Classe Real: 0 (Avião) \\ Predição do classificador: 8 (Barco)}
+        \label{fig:fig23}
+    \end{subfigure}%
+\end{figure}
+
+% airplane 0										
+% automobile 1										
+% bird		2								
+% cat		3								
+% deer		4								
+% dog		5								
+% frog		6								
+% horse		7								
+% ship		8								
+% truck     9
+
+\subsection{Análises}
+
+\subsubsection{Mantendo a mesma partição, o que ocorrá com o coeficiente de regularização caso os neurônios da
+    camada intermediária sejam inicializados com pesos sinápticos distintos a cada execução?}
+Apesar da partição ser a mesma, alterar a os pesos sinápticos faz a saida da camada de neuronios seja completamente diferente. Como o coeficiente é calculado em função do vetor de entrada, temos um novo problema de otimização novo. Portanto, um novo coeficiente otimizado deve ser calculado.
+
+
+\subsubsection{Promova algum tipo de alteração nas especificações da ELM e/ou de seu treinamento de modo a produzir resultados superiores àqueles conquistados ao se seguir o roteiro desta questão. Descreva adequadamente as alterações realizadas.}
+
+Foram seguidas algumas sugestões propostas em \\
+\url{https://towardsdatascience.com/introduction-to-extreme-learning-machines-c020020ff82b} \\
+\url{https://github.com/burnpiro/elm-pure}.
+
+No caso da base MNIST, alterando o número de neurônios na camada interna para 3000, foi possivel atingir os seguintes resultados:
+
+Valor de \textbf{c} utilizado: \textbf{64} \\
+Desempenho obtido: \textbf{96.54\%} (94.45\% originalmente)
+
+Alterar outros hiperparametros como particionamento, função ativação (Leaky ReLU ou sigmoid), camadas intermediárias e numeros de neurônios não afetou positivamente o resultado. No caso da base CIFAR10, não foram encontradas mudanças que causassem melhora significativa no desempenho.
+
+\section{Rede Neural MLP}
+
+\subsection{MNIST}
+
+Para chegar em uma melhor topologia, algumas sugestões da literatura foram empregadas. No entanto foi adotado o seguinte procedimento de tentativa e erro para obter hiperparametros mais adequados. Para cada hiperparametros, foi feito uma busca em um intervalo que se julgou representativo para cada caso. A cada busca, o hiperparametro ajustado no passo anterior foi mantido. Dessa forma construimos uma topologia iterativamente, ajustando um hiperparametro por vez.
+
+\subsubsection{Busca: Epocas}
+
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/mlp/sweep1.png}}
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/mlp/sweep2.png}}
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\subsubsection{Busca: Número de neurônios}
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/mlp/sweep3.png}}
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\subsubsection{Busca: Dropout}
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/mlp/sweep4.png}}
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\subsubsection{Busca: função de ativação}
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/mlp/sweep5.png}}
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+
+\subsubsection{Topologia Final}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Hiperparametros}    & \textbf{Referência} & \textbf{Final} \\ \hline
+        \textbf{Epocas}             & 5                   & 20             \\ \hline
+        \textbf{Neuronios}          & 512                 & 1000           \\ \hline
+        \textbf{Dropout}            & 0.5                 & 0.6            \\ \hline
+        \textbf{Função de ativação} & ReLU                & Sigmoide       \\ \hline
+    \end{tabular}
+\end{table}
+
+Foram executados 10 treinamentos por topologia. Os resultados podem ser vistos abaixo.
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/mlp/desempenho.png}}
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\subsection{CIFAR10}
+
+Para elaborar uma melhor topologia para o caso do CIFAR10, utilizou-se alguns exemplos resolvidos disponiveis na literatura: \\
+\url{https://github.com/aidiary/keras-examples/blob/master/mlp/cifar10.py} \\
+\url{https://github.com/vrakesh/CIFAR-10-Classifier/blob/master/cifar_classifier.py} \\
+Sugere-se a inclusão de camadas intermediárias com tamanhos sequencialmente menores. Dessa forma a topologia escolhida foi: \\
+\break
+Entrada $\rightarrow$ Camada Escondida(2048 neurônios; 0.2 dropout; relu) $\rightarrow$ Camada Escondida(1024 neurônios; 0.2 dropout; relu) $\rightarrow$ Camada Escondida(512 neurônios; 0.2 dropout; relu) $\rightarrow$ Saida \\
+\break
+Alem disso, a função de perda foi alterada de "SparceCategoricalCrossentropy" para "CategoricalCrossentropy".
+Foram executados 7 treinamentos por topologia. Os resultados podem ser vistos abaixo.
+
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/mlp/desempenho2.png}}
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+
+\section{Rede Neural Convolucional}
+
+\subsection{MNIST}
+
+Para elaborar uma melhor topologia para o caso do MNIST, utilizou-se alguns exemplos resolvidos disponiveis na literatura: \\
+\tiny
+\url{https://machinelearningmastery.com/how-to-develop-a-convolutional-neural-network-from-scratch-for-mnist-handwritten-digit-classification/} \\
+\normalsize
+Em ambos casos, sugere-se a inclusão de camadas intermediárias com tamanhos sequencialmente menores. Dessa forma a topologia escolhida foi: \\
+\break
+Entrada $\rightarrow$
+Camada 2D Convolucional(32; (3,3); relu) $\rightarrow$
+Camada 2D Convolucional(64; (3,3); relu) $\rightarrow$
+Camada 2D Maxpooling((2,2); dropout 0.25) $\rightarrow$
+Camada 2D Convolucional(64; (3,3); relu) $\rightarrow$
+Camada 2D Maxpooling((2,2); dropout 0.25) $\rightarrow$
+Camada Escondida(128 neurônios; relu) $\rightarrow$
+Saida
+\break
+\par Foram executados 3 treinamentos por topologia. Os resultados podem ser vistos abaixo.
+
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/mlp/desempenho3.png}}
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+\subsection{CIFAR10}
+
+Apesar de varias tentativas, não foi possivel encontrar uma topologia nova que fosse melhor que a referencia para a base CIFAR10. No entanto, existe na literatura relatos de que uma CNN poderia chegar aos 80\% de acerto para essa base.
+
+\begin{figure}[H]
+    \centering   % Para colocar a imagem no meio do "parágrafo"...
+    \centerline{\includegraphics[width=6in]{media/mlp/desempenho5.png}}
+    \label{fig:fig2}  % Coloca uma marca de referência nessa figura.
+\end{figure}
+
+
+\subsection{Análises}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Classificador} & \textbf{ MNIST} & \textbf{CIFAR10} \\ \hline
+        \textbf{Linear}        & 85.77\%         & 40.07\%          \\ \hline
+        \textbf{ELM}           & 94.45\%         & 45.37\%          \\ \hline
+        \textbf{MLP}           & 98.4\%          & 46.6\%           \\ \hline
+        \textbf{CNN}           & 99.30\%         & 68.7\%           \\ \hline
+    \end{tabular}
+    \caption{Desempenho (precisão) de cada classificador para cada base de dados}  
+\end{table}
+
+Pode-se ver que os classificadores lineares já demonstam um resultado elevado para a base MNIST e conforme usamos modelos com mais graus de liberdade, chaga-se cada vez mais proximo de um classificador 100\%. No entanto, para a base CIFAR10, só ve-se um melhora subtancial de desempenho do modelo MLP para o CNN. Isso sugere que o tipo de dado presente na base CIFAR10 um grau mais elevado de complexidade e nuances quando comparado a base MNIST. Supostamente, somente modelos capazes de incorporar semanticas com um maior nivel de abstração teriam um bom resultado para esse caso.
+
+\end{document}
